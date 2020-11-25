@@ -13,22 +13,32 @@ The script automatically add the HTML elements to your form , you just need to s
   This script as been created for the Brooklin theme so it may be need some adjustment to work in different themes
 
   - Download the `shipping-helper.shopify.js` and upload it on the `Assets` folder.
+
   - Look for the `theme.liquid` in the `Layout` folder and copy the following code near the others JS script
 
-  ```
-    <script src="{{ 'shipping-helper.shopify.js' | asset_url }}" defer="defer"></script>
+  ```html
+  <script
+    src="{{ 'shipping-helper.shopify.js' | asset_url }}"
+    defer="defer"
+  ></script>
   ```
 
-  -Download the `shipping-helper.shopify.scss` and copy the code inside the `theme.scss.liquid` file in the `Layout folder`
+  - Download the `shipping-helper.shopify.scss` and copy the code inside the `theme.scss.liquid` file in the `Layout folder`
 
 - HTML form (independent)
 
   - Download the files and place it on your project folder
+
   - Add the following code on the head section of your HTML page
 
-  ```
-  <script src="./shipping-helper.js" defer="defer" type="text/javascript"></script>
-  <link href="./shipping-helper.css" rel="stylesheet" type="text/css">
+  ```html
+  <script
+    src="./shipping-helper.js"
+    defer="defer"
+    type="text/javascript"
+  ></script>
+
+  <link href="./shipping-helper.css" rel="stylesheet" type="text/css" />
   ```
 
   - You maybe gonna need to add some extra CSS to make the elemenst fit the style of your page
@@ -95,43 +105,43 @@ There are two ways of setting up the slots time
 
 - Continuosly
 
-The slots are calculated based on `startTime ` , `endTime` and `timeSlots`
+  The slots are calculated based on `startTime ` , `endTime` and `timeSlots`
 
-timeSlots in this case is the duration in hours of the slot
+  timeSlots in this case is the duration in hours of the slot
 
-```javascript
-const shippingDateTime = [
-  ["Name method", { timeSlots: 1, startTime: 12.3, endTime: 14.3 }],
-];
-// output
-// 1° slot 12:30-13:30
-// 2° slot 13:30-14:30
-```
+  ```javascript
+  const shippingDateTime = [
+    ["Name method", { timeSlots: 1, startTime: 12.3, endTime: 14.3 }],
+  ];
+  // output
+  // 1° slot 12:30-13:30
+  // 2° slot 13:30-14:30
+  ```
 
 - Discontinuously
 
-The slots are hard coded
+  The slots are hard coded
 
-In this case timeSlots is an **array of arrays**
+  In this case timeSlots is an **array of arrays**
 
-```javascript
-const shippingDateTime = [
-  [
-    "Name method",
-    {
-      timeSlots: [
-        [8, 10],
-        [15.3, 18],
-        [22.15, 23],
-      ],
-    },
-  ],
-];
-// output
-// 1° slot 8:00-10:00
-// 2° slot 15:30-18:00
-// 3° slot 22:15-23:00
-```
+  ```javascript
+  const shippingDateTime = [
+    [
+      "Name method",
+      {
+        timeSlots: [
+          [8, 10],
+          [15.3, 18],
+          [22.15, 23],
+        ],
+      },
+    ],
+  ];
+  // output
+  // 1° slot 8:00-10:00
+  // 2° slot 15:30-18:00
+  // 3° slot 22:15-23:00
+  ```
 
 ### Days Off
 
