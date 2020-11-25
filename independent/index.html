@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./shipping-helper.css" />
+    <script src="./shipping-helper.js" async></script>
+    <style>
+        /* this css is option and is just for the good looking of the page */
+        *{
+            box-sizing: border-box;
+        }
+        .cart{
+            display: block;
+            margin: auto;
+            width: 300px;
+            border-radius: 5%;
+            background: #5C97B8; /**make sure this is the same background of .caption**/
+            padding: 1px 1.5em 1.5em;
+            color: #DCDBD8;
+        }
+        .caption {
+            display: block;
+            overflow: hidden;
+            background-color: #5c97b8;
+            width: fit-content;
+            transform: translateY(-50%);
+            padding: 0 0.5em;
+            font-size: 1.1em;
+            color:#DCDBD8 ;
+        }
+        input {
+            padding: 0.5em;
+        }
+        .cart__checkout,.newbutton{
+            padding: 0.5em 1em;
+            background-color:#183A53 ;
+            color: #DCDBD8;
+            border: 0;
+            border-radius: 5%;
+            margin-left: 30%;
+            width: 40%;
+        }
+        .datalist-options {
+            background-color:#183A53 ;
+            color: #DCDBD8;
+            padding: 0.5em 0.5em;
+        }
+        #datalist{
+            background-color:  #5C97B8;
+        }
+        .datalog{
+            margin: 2em auto;
+            display: block;
+        }
+    </style>
+    <title>Shipping-Helper</title>
+
+  <body>
+    <div class="cart">
+
+        <button class="btn cart__checkout">Checkout</button>  
+    </div>
+    <textarea class="datalog" cols="30" rows="10"></textarea>
+
+  </body>
+</html>
