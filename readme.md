@@ -49,11 +49,14 @@ The script automatically add the HTML elements to your form , you just need to s
 
   If the new button is gonna be clicked an animation will occur for the fields that are not filled properly
 
-    ```javascript
-    const disableCheckoutButton = true;
-    //or
-    const disableCheckoutButton = false;
-    ```
+
+```javascript
+    
+const disableCheckoutButton = true;
+//or
+const disableCheckoutButton = false;
+    
+```
 
 ## Dates and Time
 
@@ -61,14 +64,14 @@ The script automatically add the HTML elements to your form , you just need to s
 
   shippingDateTime needs to be an ** array cointaining one array foreach method**
 
-    ```javascript
-    const shippingDateTime = [
-    ["Name method 1", { options }],
-    ["Name method 2", { options }],
-    ];
-    // if you have just one method
-    const shippingDateTime = [["Name method", { options }]];
-    ```
+```javascript
+const shippingDateTime = [
+["Name method 1", { options }],
+["Name method 2", { options }],
+];
+// if you have just one method
+const shippingDateTime = [["Name method", { options }]];
+```
 
 ### Delay Days
 
@@ -76,10 +79,10 @@ The script automatically add the HTML elements to your form , you just need to s
 
   Must be a number
 
-    ```javascript
-    const shippingDateTime = [["Name method", { delayD: 1 }]];
-    // if the current date is 10/10/2020 the first date will be 11/10/2020
-    ```
+```javascript
+const shippingDateTime = [["Name method", { delayD: 1 }]];
+// if the current date is 10/10/2020 the first date will be 11/10/2020
+```
 
 ### Delay Hours
 
@@ -87,13 +90,13 @@ The script automatically add the HTML elements to your form , you just need to s
 
   Must be a number
 
-    ```javascript
-    const shippingDateTime = [["Name method", { delayH: 1 }]];
-    // if the current time is 12:00 the first date will be 13:00
+```javascript
+const shippingDateTime = [["Name method", { delayH: 1 }]];
+// if the current time is 12:00 the first date will be 13:00
 
-    const shippingDateTime = [["Name method", { delayH: 1.3 }]];
-    // if the current time is 12:00 the first date will be 13:30
-    ```
+const shippingDateTime = [["Name method", { delayH: 1.3 }]];
+// if the current time is 12:00 the first date will be 13:30
+```
 
 ### Time Slots (required)
 
@@ -147,11 +150,11 @@ There are two ways of setting up the slots time
 
   Or you can set the date in ISO yyyy-mm-dd format
 
-    ```javascript
-    const shippingDateTime = [["Name method", { daysOff: [1, 3, "2020-12-31"] }]];
-    // output
-    // off on mon , wed and 31 dec 2020
-    ```
+```javascript
+const shippingDateTime = [["Name method", { daysOff: [1, 3, "2020-12-31"] }]];
+// output
+// off on mon , wed and 31 dec 2020
+```
 
 ### Last order
 
