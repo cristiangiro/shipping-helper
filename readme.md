@@ -159,7 +159,8 @@ There are two ways of setting up the slots time
 
   This is optional
 
-    ```javascript
+  ```javascript
+    
     const shippingDateTime = [
     [
         "Name method",
@@ -171,4 +172,5 @@ There are two ways of setting up the slots time
     // output
     // if the current time is 20:00 the first delivery day is gonna be tomorrow
     // if the current time is 22:30 the first delivery day is gonna be in two days
-    ```
+    
+  ```
