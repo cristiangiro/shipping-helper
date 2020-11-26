@@ -174,3 +174,4 @@ There are two ways of setting up the slots time
     // if the current time is 22:30 the first delivery day is gonna be in two days
     
   ```
+  
