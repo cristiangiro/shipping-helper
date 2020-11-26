@@ -1,12 +1,13 @@
 # Shipping-Helper.js
 
-![](https://cristiangiro.com/index.html?text=DEMO)
+> You can see a demo [here](https://cristiangiro.com/shipping-helper.html).
 
 Shipping helper is a script that wants to make your life easier when it comes to make your visitors choose a date and time .
 
 It comes in two version : one specifically build for shopify and one that can be used in every HTML form.
 
 The script automatically add the HTML elements to your form , you just need to specify the CSS selector of your form in the `container` variable.
+
 
 ## Instalattion
 
