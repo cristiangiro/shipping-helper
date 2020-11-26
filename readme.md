@@ -1,6 +1,6 @@
 # Shipping-Helper.js
 
-[![](https://cristiangiro.com/shipping-helper.html?text=DEMO)]
+![](https://cristiangiro.com/index.html?text=DEMO)
 
 Shipping helper is a script that wants to make your life easier when it comes to make your visitors choose a date and time .
 
