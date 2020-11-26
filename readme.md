@@ -93,7 +93,7 @@ The script automatically add the HTML elements to your form , you just need to s
 
     const shippingDateTime = [["Name method", { delayH: 1.3 }]];
     // if the current time is 12:00 the first date will be 13:30
-```
+    ```
 
 ### Time Slots (required)
 
