@@ -9,7 +9,7 @@ It comes in two version : one specifically build for shopify and one that can be
 The script automatically add the HTML elements to your form , you just need to specify the CSS selector of your form in the `container` variable.
 
 
-## Instalattion
+## Instalation
 
 - Shopify
 
