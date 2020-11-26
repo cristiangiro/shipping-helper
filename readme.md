@@ -25,6 +25,8 @@ The script automatically add the HTML elements to your form , you just need to s
 
   - Download the `shipping-helper.shopify.scss` and copy the code inside the `theme.scss.liquid` file in the `Layout folder`
 
+  - If you keep the default container value you need to activate the 'cart notes' in your cart page 
+
 - HTML form (independent)
 
   - Download the files and place it on your project folder
