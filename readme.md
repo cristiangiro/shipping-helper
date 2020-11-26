@@ -41,13 +41,13 @@ The script automatically add the HTML elements to your form , you just need to s
 
 ## Settings
 
-    At the very beginning of the JS file you are gonna find the settings for the logic of the script
+  At the very beginning of the JS file you are gonna find the settings for the logic of the script
 
 ### Disable checkout button
 
-    If set to `true` is gonna create a substitute of the checkout button and hiding the original one till that all the fields are not properly filled.
+  If set to `true` is gonna create a substitute of the checkout button and hiding the original one till that all    the fields are not properly filled.
 
-    If the new button is gonna be clicked an animation will occur for the fields that are not filled properly
+  If the new button is gonna be clicked an animation will occur for the fields that are not filled properly
 
     ```javascript
     const disableCheckoutButton = true;
@@ -57,9 +57,9 @@ The script automatically add the HTML elements to your form , you just need to s
 
 ## Dates and Time
 
-    All the informarmation foreach delivery method are contained in the `shippingDateTime` variable.
+  All the informarmation foreach delivery method are contained in the `shippingDateTime` variable.
 
-    shippingDateTime needs to be an ** array cointaining one array foreach method**
+  shippingDateTime needs to be an ** array cointaining one array foreach method**
 
     ```javascript
     const shippingDateTime = [
@@ -72,9 +72,9 @@ The script automatically add the HTML elements to your form , you just need to s
 
 ### Delay Days
 
-    This indicate the number of days between the current date and the first available date for the delivery
+  This indicate the number of days between the current date and the first available date for the delivery
 
-    Must be a number
+  Must be a number
 
     ```javascript
     const shippingDateTime = [["Name method", { delayD: 1 }]];
@@ -83,9 +83,9 @@ The script automatically add the HTML elements to your form , you just need to s
 
 ### Delay Hours
 
-    This indicate the minimun number of hours between the current time and the first available delivery slot
+  This indicate the minimun number of hours between the current time and the first available delivery slot
 
-    Must be a number
+  Must be a number
 
     ```javascript
     const shippingDateTime = [["Name method", { delayH: 1 }]];
@@ -141,11 +141,11 @@ There are two ways of setting up the slots time
 
 ### Days Off
 
-    You can set the days in wich the deliveries are unavailable this is **always an array**
+  You can set the days in wich the deliveries are unavailable this is **always an array**
 
-    You can set the days of the week in number ex 1 , 2 or 7
+  You can set the days of the week in number ex 1 , 2 or 7
 
-    Or you can set the date in ISO yyyy-mm-dd format
+  Or you can set the date in ISO yyyy-mm-dd format
 
     ```javascript
     const shippingDateTime = [["Name method", { daysOff: [1, 3, "2020-12-31"] }]];
@@ -155,9 +155,9 @@ There are two ways of setting up the slots time
 
 ### Last order
 
-    This indicate the maximum time of the current day in wich is possible have the delivery for the next day
+  This indicate the maximum time of the current day in wich is possible have the delivery for the next day
 
-    This is optional
+  This is optional
 
     ```javascript
     const shippingDateTime = [
