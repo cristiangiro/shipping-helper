@@ -1,6 +1,6 @@
 # Shipping-Helper.js
 
-> You can see a demo [here](https://cristiangiro.com/shipping-helper.html).
+> You can see a demo [here](https://shipping-helper.netlify.app/).
 
 Shipping helper is a script that wants to make your life easier when it comes to make your visitors choose a date and time .
 
