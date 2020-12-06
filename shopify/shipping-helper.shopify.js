@@ -75,7 +75,7 @@ function f_disabledCheckout() {
       }
 
       if (dateValid != true) animate(datePicker);
-      if (timeValid != true) animate(input);
+      if (timeValid != true) animate(select);
       if (deliveryMetValid != true) animate(instancesDeliveryMethods);
     });
   }
@@ -101,12 +101,11 @@ container.insertAdjacentHTML(
       <div><input type="date" class="btn--secondary datepicker-btn" min="" required ><span class="validate"></span></div>
       <input type="text" class="converteddate" name="attributes[Delivery date]" style="display:none">
     </div>
-    <div class="ext ext-input" style="visibility:hidden">
+    <div class="ext ext-select" style="visibility:hidden">
       <label class="caption">Delivery time</label>
-      <input list="" class="btn--secondary" id="input-datalist" autocomplete="off" name="attributes[Delivery time]" value="${defaultOption}">
+      <select class="btn--secondary" id="select" autocomplete="off" name="attributes[Delivery time]">
+      </select>
     </div>
-    <datalist id="datalist">
-    </datalist>
     `
 );
 
@@ -116,27 +115,31 @@ document.querySelector(".cart__note>label").classList.add("caption");
 //reset hidden elemnts
 function f_reset(el) {
   if (el === "datepick") {
-    extInput.style.visibility = "hidden";
+    extselect.style.visibility = "hidden";
     validator.className = "validate";
     datePicker.value = "";
     dateValid = false;
     f_disabledCheckout();
   }
   if (el === "datepick" || el === "timeslot") {
-    extInput.style.visibility = "hidden";
+    extselect.style.visibility = "hidden";
     timeValid = false;
     f_disabledCheckout();
   }
-  if (el === "datepick" || el === "timeslot" || el === "datalist") {
-    datalist.style.display = "none";
+  if (el === "datepick" || el === "timeslot" || el === "select") {
+    // select.style.display = "none";
     f_disabledCheckout();
   }
 }
 
 // convert in ms
-function f_ms(d = 0, h = 0, m = 0) {
-  h += Number((d % 1).toFixed(4).substring(2));
-  m += Number((h % 1).toFixed(4).substring(2));
+function f_ms(ds = 0, hr = 0, mn = 0) {
+  const d = Math.trunc(ds);
+  const h = Number((ds % 1).toFixed(4).substring(2, 4)) + Math.trunc(hr);
+  const m = Number((hr % 1).toFixed(4).substring(2, 4)) + mn;
+  console.log("m ", m);
+  console.log("h ", h);
+  console.log("d ", d);
 
   const result = d * 24 * 60 * 60 * 1000 + h * 60 * 60 * 1000 + m * 60 * 1000;
 
@@ -228,7 +231,7 @@ function setDeliverSlots() {
   const dateFromDP = dateFromDPraw.getTime();
 
   let optiontimeSlotsValues = [];
-  input.value = defaultOption;
+  select.value = defaultOption;
 
   if (dateFromDP >= min) {
     validator.className = "validate y";
@@ -258,9 +261,9 @@ function setDeliverSlots() {
           daysOff.includes(dateFromDPraw.getDay()) ||
           daysOff.includes(datePicker.value)
         ) {
-          input.value = daysOffRisp;
-          datalist.innerHTML = "";
-          extInput.style.visibility = "visible";
+          select.value = daysOffRisp;
+          select.innerHTML = "";
+          extselect.style.visibility = "visible";
           dateValid = false;
           validator.className = "validate n";
           f_disabledCheckout();
@@ -305,7 +308,7 @@ function setDeliverSlots() {
       }
 
       if (optiontimeSlotsValues != "") {
-        let optionstimeSlots = ``;
+        let optionstimeSlots = `<option class="btn select-options" value="${defaultOption}">${defaultOption}</option>`;
 
         optiontimeSlotsValues.forEach(function (element) {
           let [el1, el2] = [...element];
@@ -321,11 +324,11 @@ function setDeliverSlots() {
 
           element = convert(el1) + "-" + convert(el2);
 
-          optionstimeSlots += `<option class="btn datalist-options" value="${element}">${element}</option>`;
+          optionstimeSlots += `<option class="btn select-options" value="${element}">${element}</option>`;
         });
 
-        datalist.innerHTML = optionstimeSlots;
-        extInput.style.visibility = "visible";
+        select.innerHTML = optionstimeSlots;
+        extselect.style.visibility = "visible";
       }
     }
   } else {
@@ -338,38 +341,38 @@ function setDeliverSlots() {
 datePicker.addEventListener("input", setDeliverSlots);
 
 //datalist
-const input = document.querySelector("#input-datalist");
-const extInput = document.querySelector(".ext-input");
-const datalist = document.querySelector("#datalist");
-input.addEventListener("focus", () => (datalist.style.display = "block"));
+const select = document.querySelector("#select");
+const extselect = document.querySelector(".ext-select");
+// const datalist = document.querySelector("#datalist");
+// select.addEventListener("focus", () => (datalist.style.display = "block"));
 
-datalist.addEventListener("click", function (e) {
-  input.value = e.target.value;
-  f_reset("datalist");
-  checkTime();
-});
+// datalist.addEventListener("click", function (e) {
+//   select.value = e.target.value;
+//   f_reset("datalist");
+//   checkTime();
+// });
 
-datalist.style.width = input.offsetWidth + "px";
-datalist.style.left = input.offsetLeft + "px";
-datalist.style.top = input.offsetTop + input.offsetHeight + "px";
+// datalist.style.width = select.offsetWidth + "px";
+// datalist.style.left = select.offsetLeft + "px";
+// datalist.style.top = select.offsetTop + select.offsetHeight + "px";
 
 // validate time
 function checkTime() {
   timeValid = false;
-  const datalistOptions = document.querySelectorAll(".datalist-options");
-  datalistOptions.forEach((element) => {
-    if (element.value === input.value && element.value != "") {
+  const selectOptions = document.querySelectorAll(".select-options");
+  selectOptions.forEach((element) => {
+    if (element.value === select.value && element.value != "") {
       timeValid = true;
     }
   });
   f_disabledCheckout();
 }
-input.addEventListener("change", checkTime);
+select.addEventListener("change", checkTime);
 
 //close datalist if clicked somewhere outside the datalist
 document.querySelector("body").addEventListener("click", (e) => {
-  if (e.target != input && e.target.className != "datalist-options")
-    f_reset("datalist");
+  if (e.target != select && e.target.className != "select-options")
+    f_reset("select");
 });
 
 //if browser not support input date load jquery data picker

@@ -10,7 +10,7 @@ const shippingDateTime = [
     {
       delayD: 0,
       timeSlots: [
-        [12, 13],
+        [11.3, 13],
         [13, 15],
         [18.15, 19],
         [22, 23],
@@ -75,7 +75,7 @@ function f_disabledCheckout() {
       }
 
       if (dateValid != true) animate(datePicker);
-      if (timeValid != true) animate(input);
+      if (timeValid != true) animate(select);
       if (deliveryMetValid != true) animate(instancesDeliveryMethods);
     });
   }
@@ -91,49 +91,45 @@ for (const methods of shippingDateTime)
 container.insertAdjacentHTML(
   "afterbegin",
   ` <div class="ext">
-      <label class="caption">Delivery method</label>
+      <label class="caption">Shipping method</label>
       <div class="container_deliverymethods">
       ${deliveryMethods}
       </div>
     </div>
     <div class="ext ext-datepicker" style="visibility:hidden">
-      <label class="caption">Delivery date</label>
+      <label class="caption">Choose a Date</label>
       <div><input type="date" class="datepicker-btn" min="" required ><span class="validate"></span></div>
       <input type="text" class="converteddate" name="Date" style="display:none">
     </div>
-    <div class="ext ext-input" style="visibility:hidden">
-      <label class="caption">Delivery time</label>
-      <input list="" id="input-datalist" autocomplete="off" name="Time" value="${defaultOption}">
+    <div class="ext ext-select" style="visibility:hidden">
+      <label class="caption">Choose a Time</label>
+      <select class="btn--secondary" id="select" autocomplete="off" name="Time">
+      </select>
     </div>
-    <datalist id="datalist">
-    </datalist>
     `
 );
 
 //reset hidden elemnts
 function f_reset(el) {
   if (el === "datepick") {
-    extInput.style.visibility = "hidden";
+    extSelect.style.visibility = "hidden";
     validator.className = "validate";
     datePicker.value = "";
     dateValid = false;
     f_disabledCheckout();
   }
   if (el === "datepick" || el === "timeslot") {
-    extInput.style.visibility = "hidden";
+    extSelect.style.visibility = "hidden";
     timeValid = false;
-    f_disabledCheckout();
-  }
-  if (el === "datepick" || el === "timeslot" || el === "datalist") {
-    datalist.style.display = "none";
     f_disabledCheckout();
   }
 }
 
 // convert in ms
-function f_ms(d = 0, h = 0, m = 0) {
-  h += Number((d % 1).toFixed(4).substring(2));
-  m += Number((h % 1).toFixed(4).substring(2));
+function f_ms(ds = 0, hr = 0, mn = 0) {
+  const d = Math.trunc(ds);
+  const h = Number((ds % 1).toFixed(4).substring(2, 4)) + Math.trunc(hr);
+  const m = Number((hr % 1).toFixed(4).substring(2, 4)) + mn;
 
   const result = d * 24 * 60 * 60 * 1000 + h * 60 * 60 * 1000 + m * 60 * 1000;
 
@@ -195,8 +191,6 @@ const day = new Date();
 day.setHours(0, 0, 0, 0);
 const today = day.getTime();
 
-console.log(today);
-
 const nowraw = new Date();
 const hours = nowraw.getHours();
 const minutes = nowraw.getMinutes();
@@ -225,7 +219,7 @@ function setDeliverSlots() {
   const dateFromDP = dateFromDPraw.getTime();
 
   let optiontimeSlotsValues = [];
-  input.value = defaultOption;
+  select.value = defaultOption;
 
   if (dateFromDP >= min) {
     validator.className = "validate y";
@@ -255,10 +249,9 @@ function setDeliverSlots() {
           daysOff.includes(dateFromDPraw.getDay()) ||
           daysOff.includes(datePicker.value)
         ) {
-          input.value = daysOffRisp;
-          extInput.style.visibility = "visible";
+          select.innerHTML = `<option class="btn select-options" value="">${daysOffRisp}</option>`;
+          extSelect.style.visibility = "visible";
           dateValid = false;
-          datalist.innerHTML = "";
           validator.className = "validate n";
           f_disabledCheckout();
           return;
@@ -273,7 +266,7 @@ function setDeliverSlots() {
 
             if (
               (dateFromDP >= min && dateFromDP != today) ||
-              (dateFromDP == today && now < endS + delayH)
+              (dateFromDP == today && now < startS + delayH)
             ) {
               optiontimeSlotsValues.push(slot);
             }
@@ -302,7 +295,7 @@ function setDeliverSlots() {
       }
 
       if (optiontimeSlotsValues != "") {
-        let optionstimeSlots = ``;
+        let optionstimeSlots = `<option class="btn select-options" value="${defaultOption}">${defaultOption}</option>`;
 
         optiontimeSlotsValues.forEach(function (element) {
           let [el1, el2] = [...element];
@@ -318,11 +311,11 @@ function setDeliverSlots() {
 
           element = convert(el1) + "-" + convert(el2);
 
-          optionstimeSlots += `<option class="btn datalist-options" value="${element}">${element}</option>`;
+          optionstimeSlots += `<option class="btn select-options" value="${element}">${element}</option>`;
         });
 
-        datalist.innerHTML = optionstimeSlots;
-        extInput.style.visibility = "visible";
+        select.innerHTML = optionstimeSlots;
+        extSelect.style.visibility = "visible";
       }
     }
   } else {
@@ -335,43 +328,42 @@ function setDeliverSlots() {
 datePicker.addEventListener("input", setDeliverSlots);
 
 //datalist
-const input = document.querySelector("#input-datalist");
-const extInput = document.querySelector(".ext-input");
-const datalist = document.querySelector("#datalist");
-input.addEventListener("focus", () => (datalist.style.display = "block"));
+const extSelect = document.querySelector(".ext-select");
+const select = document.querySelector("#select");
+// input.addEventListener("focus", () => (datalist.style.display = "block"));
 
-datalist.addEventListener("click", function (e) {
-  input.value = e.target.value;
-  f_reset("datalist");
-  checkTime();
-});
+// datalist.addEventListener("click", function (e) {
+//   input.value = e.target.value;
+//   f_reset("datalist");
+//   checkTime();
+// });
 
-datalist.style.width = input.offsetWidth + "px";
-datalist.style.left = input.offsetLeft + "px";
-datalist.style.top = input.offsetTop + input.offsetHeight + "px";
+// datalist.style.width = input.offsetWidth + "px";
+// datalist.style.left = input.offsetLeft + "px";
+// datalist.style.top = input.offsetTop + input.offsetHeight + "px";
 
 // validate time
 function checkTime() {
   timeValid = false;
-  const datalistOptions = document.querySelectorAll(".datalist-options");
-  datalistOptions.forEach((element) => {
-    if (element.value === input.value && element.value != "") {
+  const selectOptions = document.querySelectorAll(".select-options");
+  selectOptions.forEach((element) => {
+    if (element.value === select.value && element.value != "") {
       timeValid = true;
     }
   });
   f_disabledCheckout();
 }
-input.addEventListener("change", checkTime);
+select.addEventListener("change", checkTime);
 
-//close datalist if clicked somewhere outside the datalist
-document.querySelector("body").addEventListener("click", (e) => {
-  if (e.target != input && e.target.className != "datalist-options")
-    f_reset("datalist");
-});
+//close select if clicked somewhere outside the select
+// document.querySelector("body").addEventListener("click", (e) => {
+//   if (e.target != select && e.target.className != "select-options")
+//     f_reset("select");
+// });
 
 //if browser not support input date load jquery data picker
 let jqui;
-if (datePicker.type === "text") {
+if (datePicker.type === "text" || !("min" in datePicker)) {
   jqui = true;
 
   const jq = document.createElement("script");
@@ -425,6 +417,6 @@ checkoutButton.addEventListener("click", (e) => {
   check();
   datalog.value = `Method:${selectedValue} | Date${
     document.querySelector(".converteddate").value
-  } | Time${input.value}`;
+  } | Time${select.value}`;
   f_reset("datepick");
 });
