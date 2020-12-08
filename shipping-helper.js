@@ -102,7 +102,7 @@ container.insertAdjacentHTML(
     </div>
     <div class="ext ext-datepicker" style="visibility:hidden">
       <label class="caption">Choose a Date</label>
-      <div><input type="text" class="datepicker-btn" required ><span class="validate"></span></div>
+      <div><input type="date" class="datepicker-btn" required ><span class="validate"></span></div>
       <input type="text" class="converteddate" name="Date" style="display:none" readonly>
     </div>
     <div class="ext ext-select" style="visibility:hidden">
