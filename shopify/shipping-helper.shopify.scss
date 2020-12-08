@@ -1,6 +1,6 @@
+//shippinghelper v0.2 by cristiangiro see documentation on GitHub https://github.com/cristiangiro/shipping-helper
 // Add this code at the end of the theme.scss.liquid (the name of the file may be different in your theme)
 // this code refers to the Brooklin theme so the variables names may chenge in your theme
-
 .timeslot {
   visibility: hidden;
   display: block;
@@ -62,4 +62,13 @@
 }
 label.radiobutton {
   margin: 0.5em;
+}
+.converteddate,
+.converteddate:focus,
+.converteddate:active {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  filter: none;
+  outline: none;
 }
